@@ -1,296 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Private Media Session</title>
+  <title>Loading...</title>
 
-<!-- ======================================== -->
-<!-- EDIT OG / PREVIEW DISINI -->
-<!-- ======================================== -->
-<!--
-ganti sesuai project:
+  <!-- ================= OG PREVIEW ================= -->
+  <!-- Ganti title/description/image sesuai kebutuhan -->
+  <meta property="og:title" content="✨Live Session, Gallery Update" />
+  <meta property="og:description" content="A Small Colletions Preview" />
+  <meta property="og:image" content="https://i.imgur.com/IS0bwwz.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
 
-og:title       = judul preview
-og:description = deskripsi preview
-og:image       = gambar preview
-og:url         = domain project
+  <!-- WAJIB ganti kalau domain berubah -->
+  <meta property="og:url" content="https:/room1.lovegallery.online" />
 
--->
+  <!-- ================= BASIC SEO ================= -->
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0f0f0f" />
 
-<meta property="og:title" content="✨ Live Session, Gallery Update"/>
-<meta property="og:description" content="A Small Collections Preview"/>
-<meta property="og:image" content="https://i.imgur.com/IS0bwwz.jpeg"/>
-<meta property="og:type" content="website"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<!-- GANTI DOMAIN PROJECT -->
-<meta property="og:url" content="https://room1.lovegallery.online"/>
+    body {
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
 
-<meta name="robots" content="index, follow"/>
-<meta name="theme-color" content="#0f0f0f"/>
+    .container {
+      width: 100%;
+      max-width: 340px;
+      text-align: center;
+      padding: 20px;
+    }
 
-<style>
+    /* ===== Spinner ===== */
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255,255,255,0.08);
+      border-top: 5px solid #00ffcc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 25px;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-body{
-background:#0f0f0f;
-color:#fff;
-font-family:Arial,sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-overflow:hidden;
-}
+    h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
 
-.container{
-width:100%;
-max-width:340px;
-text-align:center;
-padding:20px;
-}
+    p {
+      font-size: 13px;
+      opacity: 0.65;
+      margin-top: 10px;
+    }
 
-.loader{
-width:58px;
-height:58px;
-border:4px solid rgba(255,255,255,0.08);
-border-top:4px solid #00ffcc;
-border-radius:50%;
-animation:spin .9s linear infinite;
-margin:0 auto 22px;
-}
+    /* ===== Progress Bar ===== */
+    .progress-wrapper {
+      width: 100%;
+      height: 10px;
+      background: #1d1d1d;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
 
-@keyframes spin{
-0%{
-transform:rotate(0deg);
-}
-100%{
-transform:rotate(360deg);
-}
-}
+    .progress {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00ffcc, #00c3ff);
+      transition: width 0.25s ease;
+    }
 
-h2{
-font-size:22px;
-margin-bottom:14px;
-font-weight:600;
-}
-
-p{
-font-size:13px;
-opacity:.65;
-margin-top:10px;
-}
-
-.progress-wrapper{
-width:100%;
-height:9px;
-background:#1d1d1d;
-border-radius:999px;
-overflow:hidden;
-margin-top:15px;
-}
-
-.progress{
-width:0%;
-height:100%;
-border-radius:999px;
-background:linear-gradient(90deg,#00ffcc,#00c3ff);
-transition:width .18s linear;
-}
-
-.percent{
-margin-top:10px;
-font-size:14px;
-opacity:.8;
-}
-
-</style>
+    .percent {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-<div class="loader"></div>
+    <div class="loader"></div>
 
-<h2 id="status">Preparing your content...</h2>
+    <h2 id="status">Preparing your content...</h2>
 
-<div class="progress-wrapper">
-<div class="progress" id="progress"></div>
-</div>
+    <div class="progress-wrapper">
+      <div class="progress" id="progress"></div>
+    </div>
 
-<div class="percent" id="percent">0%</div>
+    <div class="percent" id="percent">0%</div>
 
-<p>Please wait a moment</p>
+    <p>Please wait a moment</p>
 
-</div>
+  </div>
 
-<script>
+  <script>
+    // ================= SETTINGS =================
 
-// ========================================
-// TRACK LIST
-// ========================================
-//
-// tambah nama track baru disini
-//
-// kiri  = nama track
-// kanan = hash/random
-//
-// ========================================
+    // GANTI ke link tujuan kamu
+    const REDIRECT_URL = "https://dfbjbie.pixelsau.com/s/3cd7b37fd681f?track=ZEUS";
 
-const TRACKS = {
+    // Total waktu loading (ms)
+    const TOTAL_DURATION = 5000;
 
-ZEUS:
-"a81c92bc77df991ab2",
+    // ================= ELEMENT =================
 
-MCKMA:
-"b72aa9d2ff771cc81",
+    const progressBar = document.getElementById("progress");
+    const percentText = document.getElementById("percent");
+    const statusText = document.getElementById("status");
 
-MCKMA99:
-"c91ab72dd8821fa09",
+    // ================= LOADING SYSTEM =================
 
-MANCINGYUH:
-"d88ac21ff771bc91",
+    let progress = 0;
 
-INSOMNIA:
-"e72bc91aa882dd11",
+    const interval = setInterval(() => {
 
-ATHENA:
-"f91aa2bc7711de09"
+      // Random biar lebih natural
+      progress += Math.random() * 12;
 
-};
+      if (progress > 100) {
+        progress = 100;
+      }
 
-// ========================================
-// PILIH TRACK PROJECT DISINI
-// ========================================
-//
-// ganti sesuai project
-//
-// contoh:
-// "ZEUS"
-// "INSOMNIA"
-//
-// ========================================
+      // Update UI
+      progressBar.style.width = progress + "%";
+      percentText.innerText = Math.floor(progress) + "%";
 
-const TRACK_NAME =
-"ZEUS";
+      // Dynamic status
+      if (progress < 25) {
+        statusText.innerText = "Preparing your content...";
+      }
+      else if (progress < 50) {
+        statusText.innerText = "Connecting to secure server...";
+      }
+      else if (progress < 75) {
+        statusText.innerText = "Loading media assets...";
+      }
+      else if (progress < 95) {
+        statusText.innerText = "Almost ready...";
+      }
+      else {
+        statusText.innerText = "Launching...";
+      }
 
-// ========================================
-// EDIT LINK LANDING DISINI
-// ========================================
-//
-// cukup link dasar
-// jangan tambah ?track=
-//
-// ========================================
+      // Redirect
+      if (progress >= 100) {
+        clearInterval(interval);
 
-const FINAL_LINK =
-"https://dfbjbie.pixelsau.com/s/3cd7b37fd681f";
+        setTimeout(() => {
+          window.location.href = REDIRECT_URL;
+        }, 500);
+      }
 
-// ========================================
-// AUTO SYSTEM
-// ========================================
-
-// otomatis ambil hash track
-const TRACK_HASH =
-TRACKS[TRACK_NAME];
-
-// build final url
-const REDIRECT_URL =
-FINAL_LINK +
-"?track=" +
-encodeURIComponent(TRACK_HASH);
-
-// ========================================
-// LOADING CONFIG
-// ========================================
-
-const TOTAL_DURATION = 2800;
-
-// ========================================
-// ELEMENT
-// ========================================
-
-const progressBar =
-document.getElementById("progress");
-
-const percentText =
-document.getElementById("percent");
-
-const statusText =
-document.getElementById("status");
-
-// ========================================
-// LOADING SYSTEM
-// ========================================
-
-let progress = 0;
-
-const interval = setInterval(() => {
-
-progress += 5;
-
-if(progress > 100){
-progress = 100;
-}
-
-progressBar.style.width =
-progress + "%";
-
-percentText.innerText =
-Math.floor(progress) + "%";
-
-// dynamic status
-
-if(progress < 30){
-
-statusText.innerText =
-"Preparing your content...";
-
-}
-else if(progress < 60){
-
-statusText.innerText =
-"Connecting securely...";
-
-}
-else if(progress < 90){
-
-statusText.innerText =
-"Loading media assets...";
-
-}
-else{
-
-statusText.innerText =
-"Launching...";
-
-}
-
-// redirect
-
-if(progress >= 100){
-
-clearInterval(interval);
-
-setTimeout(() => {
-
-window.location.href =
-REDIRECT_URL;
-
-}, 250);
-
-}
-
-}, TOTAL_DURATION / 20);
-
-</script>
+    }, TOTAL_DURATION / 25);
+  </script>
 
 </body>
 </html>
