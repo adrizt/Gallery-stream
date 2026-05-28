@@ -1,188 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Loading...</title>
+<title>Private Media Session</title>
 
-  <!-- ================= OG PREVIEW ================= -->
-  <!-- Ganti title/description/image sesuai kebutuhan -->
-  <meta property="og:title" content="✨Live Session, Gallery Update" />
-  <meta property="og:description" content="A Small Collections Preview " />
-  <meta property="og:image" content="https://i.imgur.com/IS0bwwz.jpeg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:type" content="website" />
+<!-- ======================================== -->
+<!-- EDIT OG / PREVIEW DISINI -->
+<!-- ======================================== -->
+<!--
+ganti sesuai project:
 
-  <!-- WAJIB ganti kalau domain berubah -->
-  <meta property="og:url" content="https:/room1.lovegallery.online" />
+og:title       = judul preview
+og:description = deskripsi preview
+og:image       = gambar preview
+og:url         = domain project
 
-  <!-- ================= BASIC SEO ================= -->
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0f0f0f" />
+-->
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta property="og:title" content="✨ Live Session, Gallery Update"/>
+<meta property="og:description" content="A Small Collections Preview"/>
+<meta property="og:image" content="https://i.imgur.com/IS0bwwz.jpeg"/>
+<meta property="og:type" content="website"/>
 
-    body {
-      background: #0f0f0f;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+<!-- GANTI DOMAIN PROJECT -->
+<meta property="og:url" content="https://room1.lovegallery.online"/>
 
-    .container {
-      width: 100%;
-      max-width: 340px;
-      text-align: center;
-      padding: 20px;
-    }
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#0f0f0f"/>
 
-    /* ===== Spinner ===== */
-    .loader {
-      width: 60px;
-      height: 60px;
-      border: 5px solid rgba(255,255,255,0.08);
-      border-top: 5px solid #00ffcc;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 25px;
-    }
+<style>
 
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    h2 {
-      font-size: 22px;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
+body{
+background:#0f0f0f;
+color:#fff;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+overflow:hidden;
+}
 
-    p {
-      font-size: 13px;
-      opacity: 0.65;
-      margin-top: 10px;
-    }
+.container{
+width:100%;
+max-width:340px;
+text-align:center;
+padding:20px;
+}
 
-    /* ===== Progress Bar ===== */
-    .progress-wrapper {
-      width: 100%;
-      height: 10px;
-      background: #1d1d1d;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 15px;
-    }
+.loader{
+width:58px;
+height:58px;
+border:4px solid rgba(255,255,255,0.08);
+border-top:4px solid #00ffcc;
+border-radius:50%;
+animation:spin .9s linear infinite;
+margin:0 auto 22px;
+}
 
-    .progress {
-      width: 0%;
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #00ffcc, #00c3ff);
-      transition: width 0.25s ease;
-    }
+@keyframes spin{
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
+}
 
-    .percent {
-      margin-top: 10px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-  </style>
+h2{
+font-size:22px;
+margin-bottom:14px;
+font-weight:600;
+}
+
+p{
+font-size:13px;
+opacity:.65;
+margin-top:10px;
+}
+
+.progress-wrapper{
+width:100%;
+height:9px;
+background:#1d1d1d;
+border-radius:999px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.progress{
+width:0%;
+height:100%;
+border-radius:999px;
+background:linear-gradient(90deg,#00ffcc,#00c3ff);
+transition:width .18s linear;
+}
+
+.percent{
+margin-top:10px;
+font-size:14px;
+opacity:.8;
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="loader"></div>
+<div class="loader"></div>
 
-    <h2 id="status">Preparing your content...</h2>
+<h2 id="status">Preparing your content...</h2>
 
-    <div class="progress-wrapper">
-      <div class="progress" id="progress"></div>
-    </div>
+<div class="progress-wrapper">
+<div class="progress" id="progress"></div>
+</div>
 
-    <div class="percent" id="percent">0%</div>
+<div class="percent" id="percent">0%</div>
 
-    <p>Please wait a moment</p>
+<p>Please wait a moment</p>
 
-  </div>
+</div>
 
-  <script>
-    // ================= SETTINGS =================
+<script>
 
-    // GANTI ke link tujuan kamu
-    const REDIRECT_URL = "https://dfbjbie.pixelsau.com/s/3cd7b37fd681f?track=ZEUS";
+// ========================================
+// TRACK LIST
+// ========================================
+//
+// tambah nama track baru disini
+//
+// kiri  = nama track
+// kanan = hash/random
+//
+// ========================================
 
-    // Total waktu loading (ms)
-    const TOTAL_DURATION = 5000;
+const TRACKS = {
 
-    // ================= ELEMENT =================
+ZEUS:
+"a81c92bc77df991ab2",
 
-    const progressBar = document.getElementById("progress");
-    const percentText = document.getElementById("percent");
-    const statusText = document.getElementById("status");
+MCKMA:
+"b72aa9d2ff771cc81",
 
-    // ================= LOADING SYSTEM =================
+MCKMA99:
+"c91ab72dd8821fa09",
 
-    let progress = 0;
+MANCINGYUH:
+"d88ac21ff771bc91",
 
-    const interval = setInterval(() => {
+INSOMNIA:
+"e72bc91aa882dd11",
 
-      // Random biar lebih natural
-      progress += Math.random() * 12;
+ATHENA:
+"f91aa2bc7711de09"
 
-      if (progress > 100) {
-        progress = 100;
-      }
+};
 
-      // Update UI
-      progressBar.style.width = progress + "%";
-      percentText.innerText = Math.floor(progress) + "%";
+// ========================================
+// PILIH TRACK PROJECT DISINI
+// ========================================
+//
+// ganti sesuai project
+//
+// contoh:
+// "ZEUS"
+// "INSOMNIA"
+//
+// ========================================
 
-      // Dynamic status
-      if (progress < 25) {
-        statusText.innerText = "Preparing your content...";
-      }
-      else if (progress < 50) {
-        statusText.innerText = "Connecting to secure server...";
-      }
-      else if (progress < 75) {
-        statusText.innerText = "Loading media assets...";
-      }
-      else if (progress < 95) {
-        statusText.innerText = "Almost ready...";
-      }
-      else {
-        statusText.innerText = "Launching...";
-      }
+const TRACK_NAME =
+"ZEUS";
 
-      // Redirect
-      if (progress >= 100) {
-        clearInterval(interval);
+// ========================================
+// EDIT LINK LANDING DISINI
+// ========================================
+//
+// cukup link dasar
+// jangan tambah ?track=
+//
+// ========================================
 
-        setTimeout(() => {
-          window.location.href = REDIRECT_URL;
-        }, 500);
-      }
+const FINAL_LINK =
+"https://dfbjbie.pixelsau.com/s/3cd7b37fd681f";
 
-    }, TOTAL_DURATION / 25);
-  </script>
+// ========================================
+// AUTO SYSTEM
+// ========================================
+
+// otomatis ambil hash track
+const TRACK_HASH =
+TRACKS[TRACK_NAME];
+
+// build final url
+const REDIRECT_URL =
+FINAL_LINK +
+"?track=" +
+encodeURIComponent(TRACK_HASH);
+
+// ========================================
+// LOADING CONFIG
+// ========================================
+
+const TOTAL_DURATION = 2800;
+
+// ========================================
+// ELEMENT
+// ========================================
+
+const progressBar =
+document.getElementById("progress");
+
+const percentText =
+document.getElementById("percent");
+
+const statusText =
+document.getElementById("status");
+
+// ========================================
+// LOADING SYSTEM
+// ========================================
+
+let progress = 0;
+
+const interval = setInterval(() => {
+
+progress += 5;
+
+if(progress > 100){
+progress = 100;
+}
+
+progressBar.style.width =
+progress + "%";
+
+percentText.innerText =
+Math.floor(progress) + "%";
+
+// dynamic status
+
+if(progress < 30){
+
+statusText.innerText =
+"Preparing your content...";
+
+}
+else if(progress < 60){
+
+statusText.innerText =
+"Connecting securely...";
+
+}
+else if(progress < 90){
+
+statusText.innerText =
+"Loading media assets...";
+
+}
+else{
+
+statusText.innerText =
+"Launching...";
+
+}
+
+// redirect
+
+if(progress >= 100){
+
+clearInterval(interval);
+
+setTimeout(() => {
+
+window.location.href =
+REDIRECT_URL;
+
+}, 250);
+
+}
+
+}, TOTAL_DURATION / 20);
+
+</script>
 
 </body>
 </html>
